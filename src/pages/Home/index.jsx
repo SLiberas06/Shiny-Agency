@@ -1,45 +1,55 @@
 import styled from 'styled-components'
 import imageAccueil from '../../assets/imageAccueil.png'
 import { StyledLink } from '../../utils/Atoms'
+import colors from '../../utils/colors'
+
+const HomeWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`
 
 const HomeContainer = styled.div`
-  width: 90%;
-  height: 700px;
+margin: 30px;
+// background-color: ${colors.backgroundLight};
+padding: 60px 90px;
+display: flex;
+flex-direction: row;
+max-width: 1200px;
+`
+const LeftCol = styled.div`
   display: flex;
-  align-items: left;
   flex-direction: column;
-  background-color: #f9f9fc;
-  margin: 5%;
-  @media (min-width: 992px) {
-    background-color: blue;
+  justify-content: center;
+  flex: 1;
+  ${StyledLink} {
+    max-width: 250px;
   }
 `
 const Hometitle = styled.h1`
-  text-align: left;
-  width: 40%;
-  margin: 10% 5%;
-  font-size: 40px;
+padding-bottom: 30px;
+  max-width: 280px;
+  line-height: 50px;
 `
 
 const Homeimg = styled.img`
-  width: 400px;
-  height: 400px;
-  position: absolute;
-  right: 100px;
-  bottom: 100px;
+flex: 1
 `
 
 function Home() {
   return (
+    <HomeWrapper>
     <HomeContainer>
+      <LeftCol>
       <Hometitle>
         Repérez vos besoins, on s'occupe du reste, avec les meilleurs talents
       </Hometitle>
       <StyledLink to="/survey/1" $isFullLink>
         Faire le test
       </StyledLink>
+      </LeftCol>
       <Homeimg src={imageAccueil} alt="accueil" />
     </HomeContainer>
+    </HomeWrapper>
   )
 }
 
