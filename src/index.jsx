@@ -8,7 +8,7 @@ import Error from './components/Error'
 import Results from './pages/Results'
 import Freelances from './pages/Freelances'
 import Footer from './components/Footer'
-import { ThemeProvider } from './utils/context'
+import { ThemeProvider, SurveyProvider } from './utils/context'
 import  GlobalStyle  from './utils/style/GlobalStyle'
 
 
@@ -17,6 +17,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <ThemeProvider>
+        <SurveyProvider>
       <GlobalStyle/>
       <Header />
       <Switch>
@@ -37,6 +38,7 @@ ReactDOM.render(
         </Route>
       </Switch>
       <Footer/>
+      </SurveyProvider>
       </ThemeProvider>
     </Router>
   </React.StrictMode>,
