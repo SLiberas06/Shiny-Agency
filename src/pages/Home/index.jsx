@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import imageAccueil from '../../assets/imageAccueil.png'
-import colors from '../../utils/colors'
 import { StyledLink } from '../../utils/Atoms'
 
 const HomeContainer = styled.div`

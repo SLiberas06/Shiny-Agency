@@ -1,76 +1,87 @@
-import styled from 'styled-components'
+import { useEffect, useState } from 'react'
 import Card from '../components/Card'
-import jiji from '../assets/images/jiji.JPG'
-import eli from '../assets/images/eli.JPG'
-import sab from '../assets/images/sab.JPG'
-import mar from '../assets/images/mar.JPG'
-
-const freelanceProfiles = [
-  {
-    name: 'Jean-Marie ROMELART',
-    jobTitle: "Ne sait pas ce qu'il fout là",
-    picture: jiji,
-  },
-  {
-    name: 'Sabrina LIBERAS',
-    jobTitle: 'Développeuse Fullstack',
-    picture: sab,
-  },
-  {
-    name: 'Elisa ROMELART',
-    jobTitle: 'Développeuse Flanfeuse',
-    picture: eli,
-  },
-  {
-    name: 'Margo ROMELART',
-    jobTitle: 'Biberonneuse Fullstack',
-    picture: mar,
-  },
-]
-const StyledFreelances = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-`
-
-const TitleFreelance = styled.h1`
-  font-weight: 700;
-  font-size: 30px;
-  text-align: center;
-`
-
-const SubtitleFreelance = styled.h3`
-  font-weight: 200;
-  font-size: 20px;
-  color: #8186a0;
-  margin-bottom: 70px;
-`
+import styled from 'styled-components'
+import colors from '../utils/colors'
+import { Loader } from '../utils/Atoms'
 
 const CardsContainer = styled.div`
   display: grid;
   gap: 24px;
-  grid-template-rows: 330px 330px;
-  grid-template-columns: repeat(2, 2fr);
+  grid-template-rows: 350px 350px;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-items: center;
+`
+
+const PageTitle = styled.h1`
+  font-size: 30px;
+  color: black;
+  text-align: center;
+  padding-bottom: 30px;
+`
+
+const PageSubtitle = styled.h2`
+  font-size: 20px;
+  color: ${colors.secondary};
+  font-weight: 300;
+  text-align: center;
+  padding-bottom: 30px;
+`
+const LoaderWrapper = styled.div`
+  display: flex;
+  justify-content: center;
 `
 
 function Freelances() {
+  const [isDataLoading, setDataLoading] = useState(false)
+  const [error, setError] = useState(false)
+  const [freelancersList, setFreelancesList] = useState([])
+
+  useEffect(() => {
+    async function fetchFreelances() {
+      setDataLoading(true)
+      try {
+        const response = await fetch(`http://localhost:8000/freelances`)
+        const { freelancersList } = await response.json()
+        setFreelancesList(freelancersList)
+      } catch (err) {
+        console.log('===== error =====', err)
+        setError(true)
+      } finally {
+        setDataLoading(false)
+      }
+    }
+    fetchFreelances()
+  }, [])
+
+  if (error) {
+    return <span>Oups il y a eu un problème</span>
+  }
+
   return (
-    <StyledFreelances>
-      <TitleFreelance>Trouvez votre prestataire</TitleFreelance>
-      <SubtitleFreelance>
+    <div>
+      <PageTitle>Trouvez votre prestataire</PageTitle>
+      <PageSubtitle>
         Chez Shiny nous réunissons les meilleurs profils pour vous.
-      </SubtitleFreelance>
-      <CardsContainer>
-        {freelanceProfiles.map((profile, index) => (
-          <Card
-            key={`${profile.name}-${index}`}
-            label={profile.jobTitle}
-            title={profile.name}
-            picture={profile.picture}
-          />
-        ))}
-      </CardsContainer>
-    </StyledFreelances>
+      </PageSubtitle>
+      {isDataLoading ? (
+        <LoaderWrapper>
+          <Loader />
+        </LoaderWrapper>
+      ) : (
+        <CardsContainer>
+          {freelancersList.map((profile, index) => (
+            <Card
+              key={`${profile.name}-${index}`}
+              label={profile.job}
+              title={profile.name}
+              picture={profile.picture}
+            />
+          ))}
+        </CardsContainer>
+      )}
+    </div>
   )
 }
+
 export default Freelances
