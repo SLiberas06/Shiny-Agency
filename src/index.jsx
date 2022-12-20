@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Home from './pages/Home'
-import Survey from './pages/survey'
+import Survey from './pages/Survey'
 import Header from './components/Header'
 import Error from './components/Error'
 import Results from './pages/Results'
@@ -33,7 +33,7 @@ ReactDOM.render(
         <Route path="/freelances">
           <Freelances/>
         </Route>
-        <Route>
+        <Route path="*">
           <Error />
         </Route>
       </Switch>

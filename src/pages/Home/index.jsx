@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import imageAccueil from '../../assets/imageAccueil.png'
 import { StyledLink } from '../../utils/Atoms'
 import colors from '../../utils/colors'
+import {useTheme} from '../../utils/hooks'
 
 const HomeWrapper = styled.div`
   display: flex;
@@ -36,11 +37,12 @@ flex: 1
 `
 
 function Home() {
+  const {theme} =useTheme()
   return (
     <HomeWrapper>
-    <HomeContainer>
+    <HomeContainer theme={theme}>
       <LeftCol>
-      <Hometitle>
+      <Hometitle theme={theme}>
         Repérez vos besoins, on s'occupe du reste, avec les meilleurs talents
       </Hometitle>
       <StyledLink to="/survey/1" $isFullLink>
