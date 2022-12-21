@@ -2,7 +2,7 @@ import Card from '../../components/Card'
 import styled from 'styled-components'
 import colors from '../../utils/colors'
 import { Loader } from '../../utils/Atoms'
-import {useFetch, useTheme} from '../../utils/hooks'
+import { useFetch, useTheme } from '../../utils/hooks'
 
 const CardsContainer = styled.div`
   display: grid;
@@ -33,8 +33,10 @@ const LoaderWrapper = styled.div`
 `
 
 function Freelances() {
-  const {theme} = useTheme()
-  const {data, isLoading, error} = useFetch(`http://localhost:8000/freelances`)
+  const { theme } = useTheme()
+  const { data, isLoading, error } = useFetch(
+    `http://localhost:8000/freelances`
+  )
 
   const freelancersList = data?.freelancersList
 
@@ -44,13 +46,13 @@ function Freelances() {
 
   return (
     <div>
-      <PageTitle theme ={theme}>Trouvez votre prestataire</PageTitle>
-      <PageSubtitle theme ={theme}>
+      <PageTitle theme={theme}>Trouvez votre prestataire</PageTitle>
+      <PageSubtitle theme={theme}>
         Chez Shiny nous réunissons les meilleurs profils pour vous.
       </PageSubtitle>
       {isLoading ? (
         <LoaderWrapper>
-          <Loader theme ={theme} />
+          <Loader theme={theme} />
         </LoaderWrapper>
       ) : (
         <CardsContainer>

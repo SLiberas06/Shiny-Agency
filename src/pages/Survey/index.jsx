@@ -5,8 +5,7 @@ import styled from 'styled-components'
 import colors from '../../utils/colors'
 import { Loader } from '../../utils/Atoms'
 import { SurveyContext } from '../../utils/context'
-import { useFetch, useTheme} from '../../utils/hooks'
-
+import { useFetch, useTheme } from '../../utils/hooks'
 
 const SurveyContainer = styled.div`
   display: flex;
@@ -42,7 +41,7 @@ const ReplyBox = styled.button`
   align-items: center;
   justify-content: center;
   background-color: ${({ theme }) =>
-  theme === 'light' ? colors.backgroundLight : colors.backgroundDark};
+    theme === 'light' ? colors.backgroundLight : colors.backgroundDark};
   color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
   border-radius: 30px;
   cursor: pointer;
@@ -55,67 +54,66 @@ const ReplyBox = styled.button`
     margin-left: 15px;
   }
 `
-
 const ReplyWrapper = styled.div`
   display: flex;
   flex-direction: row;
 `
+function Survey() {
+  const { questionNumber } = useParams()
+  const questionNumberInt = parseInt(questionNumber)
+  const prevQuestionNumber = questionNumberInt === 1 ? 1 : questionNumberInt - 1
+  const nextQuestionNumber = questionNumberInt + 1
+  const { theme } = useTheme()
 
-function Survey(){
-    const {questionNumber} = useParams()
-    const questionNumberInt = parseInt(questionNumber)
-    const prevQuestionNumber = questionNumberInt === 1 ? 1 :
-     questionNumberInt - 1
-    const nextQuestionNumber = questionNumberInt + 1
-    const {theme} = useTheme()
+  const { saveAnswers, answers } = useContext(SurveyContext)
 
-    const {saveAnswers, answers} = useContext(SurveyContext)
-    
-    function saveReply(answer){
-      saveAnswers({[questionNumber] : answer})
-    }
+  function saveReply(answer) {
+    saveAnswers({ [questionNumber]: answer })
+  }
 
-    const {data, isLoading, error} = useFetch(`http://localhost:8000/survey`)
-    const  surveyData = data?.surveyData
+  const { data, isLoading, error } = useFetch(`http://localhost:8000/survey`)
+  const surveyData = data?.surveyData
 
-    if(error){
-      return<span> Oups il y a eu un problème</span>
-    }
+  if (error) {
+    return <span> Oups il y a eu un problème</span>
+  }
 
-    return(
-        <SurveyContainer>
-            <QuestionTitle theme={theme}>Question {questionNumber}</QuestionTitle>
-            {isLoading ? (
-            <Loader/>
-            ) : ( <QuestionContent theme={theme}>
-              {surveyData[questionNumber]}
-            </QuestionContent>
-                )}
-                <ReplyWrapper>
-                  <ReplyBox 
-                  onClick ={()=> saveReply(true)}
-                  isSelected={answers[questionNumber] === true}
-                  theme= {theme}>
-                    Oui
-                  </ReplyBox>
-                  <ReplyBox 
-                  onClick ={()=> saveReply(false)}
-                  isSelected={answers[questionNumber] === false}
-                  theme= {theme}>
-                    Non
-                  </ReplyBox>
-                </ReplyWrapper>
-            <LinkWrapper theme={theme}>
-                <Link to={`/survey/${prevQuestionNumber}`}>Précédent</Link>
-               {surveyData && surveyData[questionNumberInt + 1 ] ? (
-                <Link to={`/survey/${nextQuestionNumber}`}>Suivant</Link>
-                    ) : (
-                        <Link to="/results">Résultats</Link>
-                    )}
-               
-            </LinkWrapper>
-        </SurveyContainer>
-    )
+  return (
+    <SurveyContainer>
+      <QuestionTitle theme={theme}>Question {questionNumber}</QuestionTitle>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <QuestionContent theme={theme}>
+          {surveyData[questionNumber]}
+        </QuestionContent>
+      )}
+      <ReplyWrapper>
+        <ReplyBox
+          onClick={() => saveReply(true)}
+          isSelected={answers[questionNumber] === true}
+          theme={theme}
+        >
+          Oui
+        </ReplyBox>
+        <ReplyBox
+          onClick={() => saveReply(false)}
+          isSelected={answers[questionNumber] === false}
+          theme={theme}
+        >
+          Non
+        </ReplyBox>
+      </ReplyWrapper>
+      <LinkWrapper theme={theme}>
+        <Link to={`/survey/${prevQuestionNumber}`}>Précédent</Link>
+        {surveyData && surveyData[questionNumberInt + 1] ? (
+          <Link to={`/survey/${nextQuestionNumber}`}>Suivant</Link>
+        ) : (
+          <Link to="/results">Résultats</Link>
+        )}
+      </LinkWrapper>
+    </SurveyContainer>
+  )
 }
 
 export default Survey
