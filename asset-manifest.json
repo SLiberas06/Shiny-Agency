@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/shiny-agency/static/js/main.d4bdf2f3.js",
+    "static/media/error.png": "/shiny-agency/static/media/error.65a857acbe77c87d4735.png",
+    "static/media/imageAccueil.png": "/shiny-agency/static/media/imageAccueil.53e6b5f88caded93ba19.png",
+    "index.html": "/shiny-agency/index.html",
+    "main.d4bdf2f3.js.map": "/shiny-agency/static/js/main.d4bdf2f3.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.d4bdf2f3.js"
+  ]
+}
