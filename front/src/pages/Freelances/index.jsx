@@ -18,6 +18,7 @@ const PageTitle = styled.h1`
   color: black;
   text-align: center;
   padding-bottom: 30px;
+  margin-top: 30px;
 `
 
 const PageSubtitle = styled.h2`

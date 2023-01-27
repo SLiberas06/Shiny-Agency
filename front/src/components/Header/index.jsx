@@ -5,9 +5,13 @@ import logo from '../../assets/logo.png'
 
 const GlobalHeader = styled.header`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 30px;
+  @media (min-width: 992px) {
+    padding: 30px;
+    flex-direction: row;
+  }
 `
 
 function Header() {

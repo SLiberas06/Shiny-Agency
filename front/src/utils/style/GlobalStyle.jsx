@@ -9,6 +9,7 @@ const StyledGlobalStyle = createGlobalStyle`
         background-color: ${(props) =>
           props.isDarkMode ? '#2F2E41' : 'white'};
         margin: 0;
+        overflow-x: hidden;
     }
 `
 

@@ -11,6 +11,8 @@ const SurveyContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  margin-top: 3vh;
 `
 
 const QuestionTitle = styled.h2`
@@ -21,11 +23,13 @@ const QuestionTitle = styled.h2`
 
 const QuestionContent = styled.span`
   margin: 30px;
+  text-align: center;
   color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
 `
 
 const LinkWrapper = styled.div`
   padding-top: 30px;
+
   & a {
     color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
   }
@@ -34,9 +38,13 @@ const LinkWrapper = styled.div`
   }
 `
 const ReplyBox = styled.button`
+  @media (min-width: 992px) {
+    height: 100px;
+    width: 300px;
+  }
+  height: 80px;
+  width: 150px;
   border: none;
-  height: 100px;
-  width: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
