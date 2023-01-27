@@ -71,7 +71,9 @@ function Survey() {
     saveAnswers({ [questionNumber]: answer })
   }
 
-  const { data, isLoading, error } = useFetch(`http://localhost:8000/survey`)
+  const { data, isLoading, error } = useFetch(
+    `https://shiny-api-production.up.railway.app/survey`
+  )
   const surveyData = data?.surveyData
 
   if (error) {
