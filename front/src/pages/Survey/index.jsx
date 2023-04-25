@@ -80,7 +80,7 @@ function Survey() {
   }
 
   const { data, isLoading, error } = useFetch(
-    `https://shiny-api-production.up.railway.app/survey`
+    `https://shiny-agency-api.vercel.app/survey`
   )
   const surveyData = data?.surveyData
 

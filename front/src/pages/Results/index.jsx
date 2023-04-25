@@ -66,7 +66,7 @@ function Results() {
   const fetchParams = formatFetchParams(answers)
 
   const { data, isLoading, error } = useFetch(
-    `https://shiny-api-production.up.railway.app/results?${fetchParams}`
+    `https://shiny-agency-api.vercel.app/results?${fetchParams}`
   )
 
   if (error) {

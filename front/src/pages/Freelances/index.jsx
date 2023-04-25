@@ -36,7 +36,7 @@ const LoaderWrapper = styled.div`
 function Freelances() {
   const { theme } = useTheme()
   const { data, isLoading, error } = useFetch(
-    `https://shiny-api-production.up.railway.app/freelances`
+    `https://shiny-agency-api.vercel.app/freelances`
   )
 
   const freelancersList = data?.freelancersList
